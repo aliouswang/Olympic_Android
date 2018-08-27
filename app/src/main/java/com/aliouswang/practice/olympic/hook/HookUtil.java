@@ -12,9 +12,8 @@ import java.lang.reflect.Field;
 public class HookUtil {
 
     public static void hook(Activity activity) {
-        Class<?> activityClazz = Activity.class;
         try {
-            Field instrumentationField = activityClazz.getDeclaredField("mInstrumentation");
+            Field instrumentationField = Activity.class.getDeclaredField("mInstrumentation");
             instrumentationField.setAccessible(true);
             Instrumentation instrumentation = (Instrumentation) instrumentationField.get(activity);
             HookInstrumention hookInstrumention = new HookInstrumention(instrumentation);
